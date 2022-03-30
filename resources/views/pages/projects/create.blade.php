@@ -23,7 +23,7 @@
     </div>
 @endif
    
-<form action="{{ route('companies.store') }}" method="POST">
+<form action="{{ route('projects.store') }}" method="POST">
     @csrf
   
      @include('pages.projects.fields')

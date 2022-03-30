@@ -15,6 +15,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+	<div class="responsive">
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
@@ -42,7 +43,7 @@
         </tr>
         @endforeach
     </table>
-  
+  </div>
 		<div class="d-flex justify-content-center">
 			{!! $archives->links() !!}
 		</div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProjectController;
@@ -20,14 +21,13 @@ Route::middleware(['auth:company'])->group(function () {
 	Route::post('/task-comment', [Task_commentController::class, 'store']);
 });
 
-//hello I'm company Louie Mraz
 Route::prefix('gd')->middleware(['auth'])->group(function (){
+	Route::resource('admins',AdminController::class);
 	Route::resource('archives',ArchiveController::class);
 	Route::resource('companies',CompanyController::class);
 	Route::resource('projects',ProjectController::class);
 	Route::prefix('tasks')->group(function (){
 		Route::get('/pending',[TaskController::class,'pending'])->name('tasks.pending');
-		//Route::get('/pending',function (){return 'hi';})->name('task.pending');
 		Route::resource('comments',Task_commentController::class);
 	});
 	Route::resource('/tasks',TaskController::class);

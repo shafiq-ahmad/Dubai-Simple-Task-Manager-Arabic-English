@@ -29,9 +29,16 @@
       <img src="{{ url('/') }}/images/logo.png" alt="logo">
     </a></div>
 <div class="col-8">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light pull-right">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ url('/companies') }}">
+    <a class="navbar-brand" 
+	
+	@if(Auth::guard('web')->check())
+        href="{{ url('/gd/admins') }}"
+	@elseif(Auth::guard('company')->check())
+		href="{{ url('/companies') }}"
+	@endif
+	>
 	@if(Auth::guard('company')->user())
 	{{ Auth::guard('company')->user()->title }}
 	@elseif(Auth::user())
@@ -44,11 +51,8 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
 	  @if(Auth::guard('web')->check())
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ url('/gd/companies') }}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('/gd/projects') }}">Projects</a>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{{ url('/gd/projects') }}">Projects</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/gd/tasks') }}">Tasks</a>
@@ -63,10 +67,7 @@
            </form>
         </li>
 	  @elseif(Auth::guard('company')->check())
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ url('/companies') }}">Home</a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item active">
 		  <form method="POST" action="{{ route('logout') }}">
 			  @csrf
 			  <button class="btn btn-secondary">Logout</button>

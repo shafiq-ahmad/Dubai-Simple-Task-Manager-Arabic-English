@@ -94,7 +94,9 @@ class TaskController extends Controller
 		]);*/
 		$task_id = $request->query('task_id','');
 		$task = Task::find($task_id);
+		if(!$task) return redirect()->route('tasks.index')->with('danger','Task not found');
 		$project = Project::find($task->project_id);
+		if(!$task) return redirect()->route('tasks.index')->with('danger','Project not found');
 		$comments = Task_comment::with('task')
 			->where('task_id', $task_id)
 				->orderBy('id', 'DESC')->get();
@@ -112,13 +114,15 @@ class TaskController extends Controller
 			'task_id'=> 'required',
 			'status'=> 'required'
 		]);
-		
+		$user = Auth::user();
+		//dd($user->name);
+		$request->merge(['user' => $user->name]);
 		$task = Task::find($request->task_id);
 			//->where('status', $request->status)
 			//->first();
 		$status = $request->input('status');
 		if($status == 'Approved' || $status == 'Refused'){
-			$task->update($request->only('status'));
+			$task->update($request->only('status', 'user'));
 			return redirect()->route('tasks.index')->with('success','Task ' . $status);
 		}
 		return redirect()->route('tasks.index')->with('success','Invalid Status');
@@ -150,7 +154,7 @@ class TaskController extends Controller
 				->where('id', $task->id)
 				->first();
 				$date = date('Y-m-d H:i:s');
-		DB::beginTransaction();
+			DB::beginTransaction();
 			DB::table('archives')->insert([
 				'task' => $task->title,
 				'company' => $task->project->company_id,
@@ -163,6 +167,7 @@ class TaskController extends Controller
 				'updated_at' => $date
 			]);
 		 
+			DB::delete('DELETE FROM task_comments WHERE task_id=' . $task->id);
 			DB::delete('DELETE FROM tasks WHERE id=' . $task->id);
 			
 			DB::commit();
