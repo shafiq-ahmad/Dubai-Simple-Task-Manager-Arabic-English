@@ -7,7 +7,7 @@
                 <h2>Manage Projects</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success mb-2" href="{{ route('projects.create') }}"> Create Project</a>
+                <a class="btn btn-success mb-2" href="{{ route('projects.create') }}"><i class="fa fa-file" aria-hidden="true"></i> New</a>
             </div>
         </div>
     </div>

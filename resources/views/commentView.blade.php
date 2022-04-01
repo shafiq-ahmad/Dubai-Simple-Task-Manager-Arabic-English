@@ -34,7 +34,7 @@
 	@foreach ($comments as $c) 
 		<div class="col-12">
 				<div class="comment">
-					<span class="info" style="color:red;">{{ $c['by'] }}: </span><span class="info">Deadline: {{ $c['comment'] }}</span>
+					<span class="info" style="color:red;">{{ $c['by'] }}: </span><span class="info">{{ $c['comment'] }}</span>
 				</div>
 		</div>
 	@endforeach

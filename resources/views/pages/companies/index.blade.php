@@ -7,7 +7,7 @@
                 <h2>Manage Companies</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success mb-2" href="{{ url('/gd/companies/create') }}"> Create Company</a>
+                <a class="btn btn-success mb-2" href="{{ url('/gd/companies/create') }}"><i class="fa fa-file" aria-hidden="true"></i> New</a>
             </div>
         </div>
     </div>

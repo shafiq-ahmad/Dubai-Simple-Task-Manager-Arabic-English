@@ -40,7 +40,7 @@
 	@endif
 	>
 	@if(Auth::guard('company')->user())
-	{{ Auth::guard('company')->user()->title }}
+		Home
 	@elseif(Auth::user())
       Admin
 	@endif
@@ -98,12 +98,13 @@
     </div>
     </body>
 	<style>
-	h2 {font-size: 24px; font-weight: bold; line-height: 40px;}
-	h3 {font-size: 18px; font-weight: bold; text-align:center;}
+	h2 {font-size: 18px; font-weight: bold; line-height: 40px;}
+	h3 {font-size: 15px; font-weight: bold; text-align:center;}
 	.box {padding: 20px 30px;background-color:#ddd;border-radius:10px;margin: 10px 0;height:150px;}
 	.box span.info {font-size:70%;}
 	.box i {font-size:30px; display:block; line-height: 100px; text-align:center;}
 	.navbar-brand img {max-width:50px; max-height:50px;}
-	.page-heading {color: #aaa; font-size:30px; font-weight: bold; line-height:90px; text-align: center;}
+	.page-heading {color: #aaa; font-size:20px; font-weight: bold; line-height:50px; text-align: center;}
+	.btn {margin:3px 0;}
 	</style>
 </html>
